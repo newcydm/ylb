@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/interface/interface.iml" filepath="$PROJECT_DIR$/interface/interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent/parent.iml" filepath="$PROJECT_DIR$/parent/parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/timer/timer.iml" filepath="$PROJECT_DIR$/timer/timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/timer/timer.iml" filepath="$PROJECT_DIR$/timer/timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
       <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
     </modules>
   </component>
