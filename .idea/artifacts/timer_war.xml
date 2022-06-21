@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="timer:war">
+    <output-path>$PROJECT_DIR$/timer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>timer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="timer-1.0.0.war">
+      <element id="artifact" artifact-name="timer:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cydm.money.mapper.BidInfoMapper">
+  <resultMap id="BaseResultMap" type="BidInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="loan_id" jdbcType="INTEGER" property="loanId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="bid_money" jdbcType="DOUBLE" property="bidMoney" />
+    <result column="bid_time" jdbcType="TIMESTAMP" property="bidTime" />
+    <result column="bid_status" jdbcType="INTEGER" property="bidStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, loan_id, uid, bid_money, bid_time, bid_status
+  </sql>
+  <select id="selectTotalMoney" resultType="int">
+    select ceil(sum(bid_money)) from b_bid_info
+  </select>
+  <select id="selectTopRank" resultType="TopRank">
+    select
+      concat(left(u.phone,3),"****",right(u.phone,4)) as phone,
+      sum(b.bid_money) as money
+    from
+      b_bid_info b
+        join u_user u on u.id=b.uid
+    group by
+      u.phone
+    order by
+      sum(b.bid_money)
+      desc
+    limit 5
+
+  </select>
+
+  <select id="selectByLoanId" resultMap="BaseResultMap">
+    select
+      bi.id,
+      bi.loan_id,
+      concat(left(u.phone,3),"****",right(u.phone,4)) as uid,
+      bi.bid_money,
+      bi.bid_time,
+      bi.bid_status
+    from
+      b_bid_info bi
+        join u_user u on u.id=bi.uid
+    where bi.loan_id=#{id}
+    order by
+      bi.bid_time
+      desc
+  </select>
+  <select id="selectByUserInfoAll" resultType="Invest">
+    select
+      bi.product_name as productName,
+      b.bid_money as money,
+      b.bid_time as time,
+      b.bid_status as status
+    from
+      b_bid_info b
+        join b_loan_info bi on bi.id=b.loan_id
+    where
+      b.uid=#{id}
+    order by
+      b.bid_time
+      desc
+  </select>
+  <insert id="insert" parameterType="BidInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into b_bid_info (id, loan_id, uid, bid_money, bid_time, bid_status)
+    values (default,#{loanId},#{uid},#{bidMoney},#{bidTime},1)
+  </insert>
+  <select id="selectById" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from b_bid_info where loan_id=#{id}
+  </select>
+</mapper>

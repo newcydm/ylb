@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="kuai:war">
+    <output-path>$PROJECT_DIR$/kuai/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>kuai</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="kuai-1.0.0.war">
+      <element id="artifact" artifact-name="kuai:war exploded" />
+    </root>
+  </artifact>
+</component>

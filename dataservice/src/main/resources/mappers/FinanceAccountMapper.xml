@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cydm.money.mapper.FinanceAccountMapper">
+  <resultMap id="BaseResultMap" type="FinanceAccount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="available_money" jdbcType="DOUBLE" property="availableMoney" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, available_money
+  </sql>
+  <select id="selectByUser" resultType="double">
+    select available_money from u_finance_account
+    where uid=#{id}
+  </select>
+  <insert id="insert" parameterType="FinanceAccount">
+    insert into u_finance_account(id, uid, available_money)
+    values(default,#{uid},#{availableMoney})
+  </insert>
+  <update id="update" parameterType="FinanceAccount">
+    update u_finance_account
+    set available_money=#{availableMoney} where uid=#{uid}
+  </update>
+  <update id="updateReturnedMoney" parameterType="FinanceAccount">
+    update u_finance_account
+    set available_money=available_money+${availableMoney} where uid=#{uid}
+  </update>
+
+
+</mapper>

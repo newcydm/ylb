@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cydm.money.mapper.IncomeRecordMapper">
+  <resultMap id="BaseResultMap" type="IncomeRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="loan_id" jdbcType="INTEGER" property="loanId" />
+    <result column="bid_id" jdbcType="INTEGER" property="bidId" />
+    <result column="bid_money" jdbcType="DOUBLE" property="bidMoney" />
+    <result column="income_date" jdbcType="DATE" property="incomeDate" />
+    <result column="income_money" jdbcType="DOUBLE" property="incomeMoney" />
+    <result column="income_status" jdbcType="INTEGER" property="incomeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, loan_id, bid_id, bid_money, income_date, income_money, income_status
+  </sql>
+  <select id="selectEarnings" resultType="Earnings">
+    select
+      li.product_name as productName,
+      b.bid_money as BidMoney,
+      b.income_date as date,
+      b.income_money as incomeMoney,
+      b.income_status as status
+    from
+      b_income_record b
+        join b_loan_info li on li.id=b.loan_id
+    where b.uid=#{id}
+    order by
+      b.income_date
+      desc
+  </select>
+  <select id="selectNotRecord" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    `b_income_record`
+    where
+    income_status=#{status}
+    and
+    <![CDATA[ income_date <=now() ]]>
+
+
+  </select>
+  <update id="update" parameterType="IncomeRecord">
+    update b_income_record
+    <set>
+      <if test="incomeStatus!=null"> income_status=#{incomeStatus},</if>
+    </set>
+    where id=#{id}
+
+  </update>
+    <insert id="insert" parameterType="IncomeRecord">
+        insert into b_income_record(id, uid, loan_id, bid_id, bid_money, income_date, income_money, income_status)
+        values (default,#{uid},#{loanId},#{bidId},#{bidMoney},#{incomeDate},#{incomeMoney},#{incomeStatus})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dataservice:war">
+    <output-path>$PROJECT_DIR$/dataservice/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>dataservice</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="dataservice-1.0.0.war">
+      <element id="artifact" artifact-name="dataservice:war exploded" />
+    </root>
+  </artifact>
+</component>

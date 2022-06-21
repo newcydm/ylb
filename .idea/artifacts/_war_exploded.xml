@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="支付宝接口测试:war exploded">
+    <output-path>$PROJECT_DIR$/支付宝接口测试/target/支付宝接口测试-1.0.0</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>支付宝接口测试</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="支付宝接口测试" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.alipay.sdk:alipay-sdk-java:4.9.9" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.50" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.62" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/支付宝接口测试/target/支付宝接口测试-1.0.0/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="支付宝接口测试/web/Web" />
+    </root>
+  </artifact>
+</component>
